@@ -64,6 +64,8 @@ To run on **Linux**, you will also need to install `tkinter` separately like so:
 
 `sudo apt-get install python3-tk`
 
+On macOS the GUI depends on Tcl/Tk support built into the interpreter. If `python aleappGUI.py` fails with `ModuleNotFoundError: _tkinter`, install a macOS Python release that bundles Tk (for example, the official python.org installer) or install Homebrew's `tcl-tk` and reinstall the Homebrew Python so `_tkinter` is available. Run `python3 -m tkinter` to confirm Tk support, and see docs/init.md for more macOS-specific guidance.
+
 ## Building the binaries
 
 `packaging/build.py` builds `aleapp` with PyInstaller for the machine it runs on, from the

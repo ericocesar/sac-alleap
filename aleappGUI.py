@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import tkinter as tk
 import typing
 import json
 import queue
@@ -14,7 +13,22 @@ import scripts.plugin_loader as plugin_loader
 import leapp_functions.app.history as history
 
 from PIL import Image, ImageTk
-from tkinter import ttk, filedialog as tk_filedialog, messagebox as tk_msgbox
+
+_TKINTER_INSTALL_GUIDANCE = (
+    "Python was built without the _tkinter extension. "
+    "Install a macOS Python release that bundles Tk or install the Tk frameworks "
+    "(e.g. via python.org or brew install tcl-tk before reinstalling Homebrew Python). "
+    "Refer to ALEAPP/docs/init.md for more details."
+)
+
+try:
+    import tkinter as tk
+    from tkinter import ttk, filedialog as tk_filedialog, messagebox as tk_msgbox
+except ModuleNotFoundError as exc:
+    raise ModuleNotFoundError(
+        f"ALEAPP GUI requires Tkinter; {_TKINTER_INSTALL_GUIDANCE}"
+    ) from exc
+
 from scripts.version_info import leapp_version, check_runtime_dependencies
 from scripts.search_files import *
 from scripts.raw_image import (RAW_IMAGE_LABEL, RAW_IMAGE_SUFFIXES, RAW_IMAGE_FILE_PATTERNS,
